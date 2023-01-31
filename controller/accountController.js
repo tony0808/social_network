@@ -1,5 +1,22 @@
 const User = require('../models/user');
 
+function handle_errors(err) {
+    let errors = {
+        firstname : '',
+        username: '',
+        email : '',
+        password: ''
+    };
+
+    // validation errors
+    if (err.message.includes('user validation failed')) {
+        Object.values(err.errors).forEach(error => {
+            errors[error.properties.path] = error.properties.message;
+        });
+    }
+    return errors;
+}
+
 const account_login_get = function(req, res) {
     res.render('account/logIn', {title:'Log In'});
 };
@@ -15,7 +32,9 @@ const account_create_post = function(req, res) {
             res.redirect('/');
         })
         .catch(function(err) {
-            console.log(err);
+            const errors = handle_errors(err);
+            res.status(400);
+            res.json(errors);
         });
 };
 
