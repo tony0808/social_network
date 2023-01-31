@@ -17,3 +17,11 @@ app.get('/', function(req, res) {
 app.get('/about', function(req, res) {
     res.render('about', {title:'About'});
 });
+
+app.get('/sign-up', function(req, res) {
+    res.render('signUp', {title:'Sign Up'});
+});
+
+app.get('/log-in', function(req, res) {
+    res.render('logIn', {title:'Log In'})
+})
