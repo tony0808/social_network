@@ -11,5 +11,9 @@ app.listen(3000);
 
 // routes
 app.get('/', function(req, res) {
-    res.render('index');
+    res.render('index', {title:'homepage'});
+});
+
+app.get('/about', function(req, res) {
+    res.render('about', {title:'About'});
 });
