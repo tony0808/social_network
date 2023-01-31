@@ -1,4 +1,4 @@
-const pendingUser = require('../models/pendingUser')
+const User = require('../models/user');
 
 const account_login_get = function(req, res) {
     res.render('account/logIn', {title:'Log In'});
@@ -9,8 +9,8 @@ const account_create_get = function(req, res) {
 };
 
 const account_create_post = function(req, res) {
-    const newPendingUser = new pendingUser(req.body);
-    newPendingUser.save()
+    const newUser = new User(req.body);
+    newUser.save()
         .then(function(result) {
             res.redirect('/');
         })
