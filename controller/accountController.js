@@ -1,11 +1,11 @@
 const pendingUser = require('../models/pendingUser')
 
 const account_login_get = function(req, res) {
-    res.render('logIn', {title:'Log In'});
+    res.render('account/logIn', {title:'Log In'});
 };
 
 const account_create_get = function(req, res) {
-    res.render('signUp', {title:'Sign Up'});
+    res.render('account/signUp', {title:'Sign Up'});
 };
 
 const account_create_post = function(req, res) {
