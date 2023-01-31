@@ -7,7 +7,7 @@
         <h1>Sign Up</h1>
     </header>
     <div>
-        <form>
+        <form action="/account/create" method="POST">
             <label for="firstname">Firstname</label><br>
             <input type="text" id="firstname" name="firstname"><br>
             <label for="lastname">Lastname</label><br>
@@ -20,7 +20,7 @@
             <input type="email" id="mail" name="mail"><br>
             <label for="country">Country</label><br>
             <input type="text" id="country" name="country"><br>
-            <input type="button" value="Submit">
+            <button>Submit</button>
         </form>
     </div>
     <%- include('./partials/footer.ejs') %>

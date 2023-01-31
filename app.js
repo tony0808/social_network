@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const accountRoutes = require('./routes/account');
 
 // express app
 const app = express();
@@ -21,6 +22,10 @@ mongoose.connect(dbURI)
 // register view engine
 app.set('view engine', 'ejs');
 
+// middleware and static files
+app.use(express.static('public'));
+app.use(express.urlencoded({extended:true}));
+
 // routes
 app.get('/', function(req, res) {
     res.render('index', {title:'homepage'});
@@ -30,10 +35,5 @@ app.get('/about', function(req, res) {
     res.render('about', {title:'About'});
 });
 
-app.get('/sign-up', function(req, res) {
-    res.render('signUp', {title:'Sign Up'});
-});
-
-app.get('/log-in', function(req, res) {
-    res.render('logIn', {title:'Log In'})
-})
+// account routes
+app.use(accountRoutes);

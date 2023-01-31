@@ -7,12 +7,12 @@
         <h1>Log In</h1>
     </header>
     <div>
-        <form>
+        <form action="/account/login" method="POST">
             <label for="username">Username</label><br>
             <input type="text" id="username" name="username"><br>
             <label for="password">Password</label><br>
             <input type="password" id="password" name="password"><br>
-            <input type="button" value="Submit">
+            <button>Submit</button>
         </form>
     </div>
     <%- include('./partials/footer.ejs') %>
