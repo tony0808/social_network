@@ -25,6 +25,7 @@ app.set('view engine', 'ejs');
 // middleware and static files
 app.use(express.static('public'));
 app.use(express.urlencoded({extended:true}));
+app.use(express.json());
 
 // routes
 app.get('/', function(req, res) {

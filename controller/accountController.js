@@ -1,20 +1,19 @@
 const User = require('../models/user');
 
-function handle_errors(err) {
-    let errors = {
-        firstname : '',
-        username: '',
-        email : '',
-        password: ''
+function account_creation_error_handler(err) {
+    let errorInfo = {
+        firstname:'',
+        username:'',
+        password:'',
+        email:''
     };
 
-    // validation errors
     if (err.message.includes('user validation failed')) {
         Object.values(err.errors).forEach(error => {
-            errors[error.properties.path] = error.properties.message;
+            errorInfo[error.properties.path] = error.properties.message;
         });
     }
-    return errors;
+    return errorInfo;
 }
 
 const account_login_get = function(req, res) {
@@ -29,17 +28,16 @@ const account_create_post = function(req, res) {
     const newUser = new User(req.body);
     newUser.save()
         .then(function(result) {
-            res.redirect('/');
+            res.status(200).send('user account created');
         })
         .catch(function(err) {
-            const errors = handle_errors(err);
-            res.status(400);
-            res.json(errors);
-        });
+            const errorInfo = account_creation_error_handler(err);
+            res.status(400).json({errorInfo});
+        })
 };
 
 const account_login_post = function(req, res) {
-    console.log(req.body);
+    console.log(req);
 };
 
 

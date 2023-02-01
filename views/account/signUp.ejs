@@ -7,22 +7,28 @@
         <h1>Sign Up</h1>
     </header>
     <div>
-        <form action="/account/create" method="POST">
+        <form id="signup-form">
             <label for="firstname">Firstname</label><br>
             <input type="text" id="firstname" name="firstname"><br>
+            <span id="firstname-error-msg"></span><br>
             <label for="lastname">Lastname</label><br>
             <input type="text" id="lastname" name="lastname"><br>
             <label for="username">Username</label><br>
             <input type="text" id="username" name="username"><br>
+            <span id="username-error-msg"></span><br>
             <label for="password">Password</label><br>
             <input type="password" id="password" name="password"><br>
+            <span id="password-error-msg"></span><br>
             <label for="mail">Email</label><br>
             <input type="email" id="email" name="email"><br>
+            <span id="email-error-msg"></span><br>
             <label for="country">Country</label><br>
             <input type="text" id="country" name="country"><br>
+            <span id="signup-form-error-area"></span><br>
             <button>Submit</button>
         </form>
     </div>
     <%- include('../partials/footer.ejs') %>
+    <script type="text/javascript" src="/account_script.js"></script>
 </body>
 </html>
