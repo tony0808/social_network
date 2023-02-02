@@ -7,14 +7,17 @@
         <h1>Log In</h1>
     </header>
     <div>
-        <form action="/account/login" method="POST">
+        <form id="login-form">
             <label for="username">Username</label><br>
             <input type="text" id="username" name="username"><br>
+            <span id="username-error-msg"></span><br>
             <label for="password">Password</label><br>
             <input type="password" id="password" name="password"><br>
+            <span id="password-error-msg"></span><br>
             <button>Submit</button>
         </form>
     </div>
     <%- include('../partials/footer.ejs') %>
+    <script type="text/javascript" src="/login_script.js"></script>
 </body>
 </html>

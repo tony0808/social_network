@@ -1,5 +1,7 @@
 
-document.getElementById('signup-form').onsubmit = function() {
+const form_id = 'signup-form';
+
+document.getElementById(form_id).onsubmit = function() {
     
     // this object exchanges data with the server behind the scenes
     let xhttp = new XMLHttpRequest();
@@ -8,7 +10,7 @@ document.getElementById('signup-form').onsubmit = function() {
     const method = 'POST';
 
     // get the form data and convert it to JSON 
-    const formData = new FormData(document.getElementById('signup-form'));
+    const formData = new FormData(document.getElementById(form_id));
     const object = {};
     formData.forEach((value, key) => object[key] = value);
     const jsonData = JSON.stringify(object);
@@ -18,7 +20,7 @@ document.getElementById('signup-form').onsubmit = function() {
     xhttp.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
             clearErrorArea();
-            console.log('good');
+            location.href='/';
         }
         else if(this.status === 400) {
             clearErrorArea()
