@@ -2,11 +2,10 @@
 <html lang="en">
 <%- include('../partials/head.ejs') %>
 <body>
-    <%- include('./blogPartials/nav.ejs') %>
     <header>
-        <h1>My Personal Blog</h1>
+        <h1><%= user.firstname%>'s personal blog page</h1>
     </header>
-  
+    <%- include('./blogPartials/nav.ejs') %>
     <%- include('../partials/footer.ejs') %>
 </body>
 </html>
