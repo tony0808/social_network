@@ -35,6 +35,10 @@ const blog_list_page_get = function(req, res) {
                 console.log(err);
             });
     }
+
+    if(blog_arr.length === 0) {        
+        res.render('blog/blogs/blogList', {title:'List of Blogs'});
+    }
 };
 
 const blog_create_page_post = function(req, res) {
