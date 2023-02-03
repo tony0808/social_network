@@ -17,6 +17,26 @@ const blog_create_page_get = function(req, res) {
     res.render('blog/blogs/blogForm', {title:'Create new Blog'});
 };
 
+const blog_list_page_get = function(req, res) {
+    let blog_arr = res.locals.user.blogs;
+    let blog_counter = 0;
+    let blog_list = [];
+    for(index in blog_arr) {
+        let blog_id = blog_arr[index];
+        Blog.findOne({_id:blog_id})
+            .then((result) => {
+                blog_list.push(result);
+                blog_counter += 1;
+                if (blog_counter === blog_arr.length) {
+                    res.render('blog/blogs/blogList', {title:'List of Blogs', blogs:blog_list});
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+};
+
 const blog_create_page_post = function(req, res) {
     req.body['author'] = res.locals.user._id;
     const newBlog = new Blog(req.body);
@@ -27,7 +47,7 @@ const blog_create_page_post = function(req, res) {
                 {$push: {blogs:newBlog._id}}
             )
             .then((result) => {
-                console.log('updated', );
+                console.log('blog added to user array');
             })
             .catch((err) => {
                 console.log(err);
@@ -55,5 +75,6 @@ module.exports = {
     blog_friends_page_get,
     blog_create_page_get,
     blog_create_page_post,
+    blog_list_page_get,
     blog_logout_get
 }

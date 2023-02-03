@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../../partials/head.ejs') %>
+<body>
+    <header>
+        <h1><%= user.firstname%>'s all blogs</h1>
+    </header>
+    <%- include('../blogPartials/nav.ejs') %>
+    <main>
+        <% for (let i=0; i<blogs.length; i++) { %>
+            <h3><%= blogs[i].title %></h3>
+            <p><%= blogs[i].content %></p>
+        <% } %>
+    </main>
+    <%- include('../../partials/footer.ejs') %>
+</body>
+</html>
