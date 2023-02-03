@@ -14,7 +14,7 @@ document.getElementById(form_id).onsubmit = function() {
     const object = {};
     formData.forEach((value, key) => object[key] = value);
     const jsonData = JSON.stringify(object);
-
+    
     // this function is called when the readyState property changes
     // in our case, code 4 means that the request has finished and the response is ready
     xhttp.onreadystatechange = function() {

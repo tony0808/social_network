@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../../partials/head.ejs') %>
+<body>
+    <header>
+        <h1><%= user.firstname%>'s blogs</h1>
+    </header>
+    <%- include('../blogPartials/nav.ejs') %>
+    <main>
+        <form id="blog-create-form">
+            <label for="title">Title</label><br>
+            <input type="text" id="blog-title" name="title"><br>
+            <label for="content">Content</label><br>
+            <textarea id="blog-content" name="content"></textarea><br>
+            <span id="blog-error-msg"></span><br>
+            <button>Create</button>
+        </form>
+    </main>
+    <%- include('../../partials/footer.ejs') %>
+    <script type="text/javascript" src="/newblog_script.js"></script>
+</body>
+</html>

@@ -23,7 +23,11 @@ const userSchema = new Schema({
         type:String,
         required:[true, 'Please enter an email'],
         validate: [isEmail, 'Please enter a valid email']
-    }
+    },
+    blogs: [{
+        type:Schema.Types.ObjectId,
+        ref:'Blog'
+    }]
 }, {timestamps: true});
 
 

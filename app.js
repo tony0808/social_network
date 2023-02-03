@@ -32,7 +32,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 // routes
-app.get('*', userAuth);
+app.use('*', userAuth);
 
 app.get('/', function(req, res) {
     res.render('index', {title:'homepage'});
