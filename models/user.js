@@ -23,9 +23,6 @@ const userSchema = new Schema({
         type:String,
         required:[true, 'Please enter an email'],
         validate: [isEmail, 'Please enter a valid email']
-    },
-    country: {
-        type:String
     }
 }, {timestamps: true});
 

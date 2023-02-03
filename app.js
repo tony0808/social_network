@@ -1,6 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const accountRoutes = require('./routes/accountRoutes');
+const blogRoutes = require('./routes/blogRoutes');
+const {requireAuth} = require('./middleware/auth');
+const cookieParser = require('cookie-parser');
 
 // express app
 const app = express();
@@ -25,6 +28,7 @@ app.set('view engine', 'ejs');
 // middleware and static files
 app.use(express.static('public'));
 app.use(express.urlencoded({extended:true}));
+app.use(cookieParser());
 app.use(express.json());
 
 // routes
@@ -36,5 +40,12 @@ app.get('/about', function(req, res) {
     res.render('about', {title:'About'});
 });
 
+app.get('/terms', function(req, res) {
+    res.render('termsAndConditions', {title:'Terms And Conditions'});
+});
+
 // account routes
 app.use('/account', accountRoutes);
+
+// blog routes
+app.use('/blog', requireAuth, blogRoutes);

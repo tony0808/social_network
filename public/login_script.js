@@ -20,7 +20,7 @@ document.getElementById(form_id).onsubmit = function() {
     xhttp.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
             clearErrorArea();
-            location.href = '/';
+            location.href = '/blog/home';
         }
         else if(this.status === 400) {
             clearErrorArea();
