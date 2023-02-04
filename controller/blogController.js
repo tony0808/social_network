@@ -1,3 +1,4 @@
+const { render } = require('ejs');
 const Blog = require('../models/blog');
 const User = require('../models/user');
 
@@ -17,7 +18,7 @@ const blog_create_page_get = function(req, res) {
     res.render('blog/blogs/blogForm', {title:'Create new Blog'});
 };
 
-const blog_list_page_get = function(req, res) {
+const all_blog_list_page_get = function(req, res) {
     let blog_arr = res.locals.user.blogs;
     let blog_counter = 0;
     let blog_list = [];
@@ -39,6 +40,26 @@ const blog_list_page_get = function(req, res) {
     if(blog_arr.length === 0) {        
         res.render('blog/blogs/blogList', {title:'List of Blogs'});
     }
+};
+
+const single_blog_list_page_get = function(req, res) {
+    const id = req.params.id;
+    Blog.findById(id)
+        .then((result) => {
+            res.render('blog/blogs/blogDetails', {title:'Blog Details', blog:result});
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+};
+
+const blog_friends_page_get = function(req, res) {
+    res.render('blog/friends', {title:'Friends'});
+};
+
+const blog_logout_get = function(req, res) {
+    res.cookie('jwt', '', {maxAge: 1});
+    res.redirect('/');
 };
 
 const blog_create_page_post = function(req, res) {
@@ -63,15 +84,6 @@ const blog_create_page_post = function(req, res) {
         });
 };
 
-const blog_friends_page_get = function(req, res) {
-    res.render('blog/friends', {title:'Friends'});
-};
-
-const blog_logout_get = function(req, res) {
-    res.cookie('jwt', '', {maxAge: 1});
-    res.redirect('/');
-};
-
 module.exports = {
     blog_home_page_get,
     blog_setting_page_get,
@@ -79,6 +91,7 @@ module.exports = {
     blog_friends_page_get,
     blog_create_page_get,
     blog_create_page_post,
-    blog_list_page_get,
+    all_blog_list_page_get,
+    single_blog_list_page_get,
     blog_logout_get
 }

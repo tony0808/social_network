@@ -9,9 +9,7 @@
     <main>
         <% if (locals.blogs) { %>
             <% for (let i=0; i<blogs.length; i++) { %>
-                <h3><%= blogs[i].title %></h3>
-                <p><%= blogs[i].content %></p>
-                <a href="">Update</a> <a href="">Delete</a>
+                <h3><a href="/blog/list/<%= blogs[i]._id %>"><%= blogs[i].title %></a></h3>
             <% } %>
         <% } else { %>
             <p> No blogs to display </p>

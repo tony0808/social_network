@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../../partials/head.ejs') %>
+<body>
+    <header>
+        <h1><%= user.firstname%>'s blogs</h1>
+    </header>
+    <%- include('../blogPartials/nav.ejs') %>
+    <main>
+        <% if (locals.blog) { %>
+            <h3><%= blog.title %></h3>
+            <p><%= blog.content %></p>
+            <button>Update</button> <button>Delete</button>
+        <% } else { %>
+            <p> Cannot display blog </p>
+        <% } %>
+
+    </main>
+    <%- include('../../partials/footer.ejs') %>
+</body>
+</html>
