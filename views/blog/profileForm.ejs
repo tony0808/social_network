@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('../../partials/head.ejs') %>
+<%- include('../partials/head.ejs') %>
 <body>
     <header>
-        <h1>Create a blog</h1>
+        <h1>Create your public profile</h1>
     </header>
-    <%- include('../blogPartials/nav.ejs') %>
+    <%- include('./blogPartials/nav.ejs') %>
     <main>
-        <form id="blog-create-form">
+        <form id="profile-create-form">
             <label for="title">Title</label><br>
             <input type="text" id="blog-title" name="title"><br>
             <label for="content">Content</label><br>
@@ -16,7 +16,7 @@
             <button>Create</button>
         </form>
     </main>
-    <%- include('../../partials/footer.ejs') %>
-    <script type="text/javascript" src="/newblog_script.js"></script>
+    <%- include('../partials/footer.ejs') %>
+    <script type="text/javascript" src="/newprofile_script.js"></script>
 </body>
 </html>

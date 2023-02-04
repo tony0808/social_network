@@ -3,7 +3,7 @@
 <%- include('../../partials/head.ejs') %>
 <body>
     <header>
-        <h1><%= user.firstname%>'s blogs</h1>
+        <h1><%= user.firstname%>'s blog</h1>
     </header>
     <%- include('../blogPartials/nav.ejs') %>
     <main>
@@ -14,7 +14,6 @@
         <% } else { %>
             <p> Cannot display blog </p>
         <% } %>
-
     </main>
     <%- include('../../partials/footer.ejs') %>
 </body>

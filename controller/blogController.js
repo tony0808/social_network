@@ -1,9 +1,24 @@
 const { render } = require('ejs');
 const Blog = require('../models/blog');
 const User = require('../models/user');
+const Profile = require('../models/profile');
 
 const blog_home_page_get = function(req, res) {
-    res.render('blog/home', {title:'My Personal Blog'});
+    const user = res.locals.user;
+    console.log(user.profile);
+    if (user.profile !== undefined) {
+        Profile.findById(user.profile)
+            .then((result) => {
+                console.log(result);
+                res.render('blog/home', {title:'My Personal Blog', profile:result});
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+    else {
+        res.render('blog/home', {title:'My Personal Blog'})
+    }
 };
 
 const blog_setting_page_get = function(req, res) {
@@ -62,6 +77,48 @@ const blog_logout_get = function(req, res) {
     res.redirect('/');
 };
 
+const blog_profile_get = function(req, res) {
+    res.render('blog/profileForm', {title:'Create Profile'});
+}
+
+const blog_profile_post = function(req, res) {
+    if (res.locals.user.profile !== undefined) {
+        Profile.findByIdAndUpdate(
+            res.locals.user.profile,
+            {title:req.body['title'], content:req.body['content']}
+        )
+        .then((result) => {
+            res.status(200).send('profile updated');
+        })  
+        .catch((err) => {
+            console.log(err);
+        })
+    }
+    else {
+        req.body['author'] = res.locals.user._id;
+        const newProfile = new Profile(req.body);
+        newProfile.save()
+            .then((result) => {
+                User.updateOne(
+                    {_id:res.locals.user._id},
+                    {$push:{profile:newProfile._id}}
+                )
+                .then((result) => {
+                    console.log('profile added to user');
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+                res.status(200).send({profile:newProfile._id});
+            })  
+            .catch((err) => {
+                console.log(err);
+                res.status(400).send('some error occured saving profile to db');
+            })
+    }
+    
+};
+
 const blog_create_page_post = function(req, res) {
     req.body['author'] = res.locals.user._id;
     const newBlog = new Blog(req.body);
@@ -80,7 +137,8 @@ const blog_create_page_post = function(req, res) {
             res.status(200).send({blog:newBlog._id});
         })
         .catch((err) => {
-            res.status(400).send('some error occured');
+            console.log(err);
+            res.status(400).send('some error occured saving blog to db');
         });
 };
 
@@ -93,5 +151,7 @@ module.exports = {
     blog_create_page_post,
     all_blog_list_page_get,
     single_blog_list_page_get,
+    blog_profile_get,
+    blog_profile_post,
     blog_logout_get
 }

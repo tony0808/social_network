@@ -27,7 +27,11 @@ const userSchema = new Schema({
     blogs: [{
         type:Schema.Types.ObjectId,
         ref:'Blog'
-    }]
+    }],
+    profile: {
+        type:Schema.Types.ObjectId,
+        ref:'Profile'
+    }
 }, {timestamps: true});
 
 

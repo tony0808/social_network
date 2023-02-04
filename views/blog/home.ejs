@@ -6,6 +6,15 @@
         <h1><%= user.firstname%>'s personal blog page</h1>
     </header>
     <%- include('./blogPartials/nav.ejs') %>
+    <main>
+        <% if (locals.profile) { %>
+            <h2><%= profile.title %></h2>
+            <p><%= profile.content %></p>
+        <% } else {%>
+            <h2>Public Information</h2>
+            <p>here you type some public that everyone cans see</p>
+        <% } %>
+    </main>
     <%- include('../partials/footer.ejs') %>
 </body>
 </html>
