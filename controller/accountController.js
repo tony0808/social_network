@@ -1,4 +1,6 @@
 const User = require('../models/user');
+const Blog = require('../models/blog');
+const Profile = require('../models/profile');
 const jwt = require('jsonwebtoken');
 
 // token max age
@@ -60,10 +62,50 @@ const account_login_post = async function(req, res) {
     }
 };
 
+const account_delete_confirm = function(req, res) {
+    res.render('account/deleteAccount', {title:'Delete Account'});
+}
+
+const account_delete = function(req, res) {
+    const user = res.locals.user;
+    const blog_arr = user.blogs;
+    const user_profile = user.profile;
+
+    for(index in blog_arr) {
+        Blog.findByIdAndDelete(blog_arr[index]._id)
+            .then((result) => {
+                console.log('deleted blog');
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+    
+    if (user_profile !== undefined) {
+        Profile.findByIdAndDelete(user_profile._id)
+            .then((result) => {
+                console.log('profile deleted');
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+
+    User.findByIdAndDelete(user._id)
+        .then((result) => {
+            console.log('user account deleted');
+            res.status(200).send('user account deleted');
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+}
 
 module.exports = {
     account_login_get,
     account_create_get,
     account_create_post,
+    account_delete_confirm,
+    account_delete,
     account_login_post
 }

@@ -1,8 +1,8 @@
 function deleteBlog(blog_id) {
     let xhttp = new XMLHttpRequest();
 
-    method = 'DELETE';
-    url = 'http://localhost:3000/blog/list/' + blog_id;
+    const method = 'DELETE';
+    const url = 'http://localhost:3000/blog/list/' + blog_id;
     xhttp.onreadystatechange = function() {
         if(this.readyState === 4 && this.status === 200) {
             location.href='/blog/home';

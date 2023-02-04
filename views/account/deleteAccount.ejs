@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head.ejs') %>
+<body>
+    <header>
+        <h1>Deleting Account</h1>
+    </header>
+    <%- include('../blog/blogPartials/nav.ejs') %>
+    <main>
+        <p>Are you sure you want to delete your account ?</p>
+        <button id="positive-delete-button">Yes</button> <button id="negative-delete-button">No</button>
+    </main>
+    <%- include('../partials/footer.ejs') %>
+    <script type="text/javascript" src="/account_delete_script.js"></script>
+</body>
+</html>
