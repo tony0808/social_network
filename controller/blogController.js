@@ -68,6 +68,30 @@ const single_blog_list_page_get = function(req, res) {
         });
 };
 
+const single_blog_delete = function(req, res) {
+    const blog_id = req.params.blog_id;
+    const blog_arr = res.locals.user.blogs;
+    // delete blog from blog collection
+    Blog.findByIdAndDelete(blog_id) 
+        .then((result) => {
+            // delete blog from user's blog's array
+            blog_arr.splice(blog_arr.indexOf(result._id), 1);
+            User.findOneAndUpdate(
+                res.locals.user._id,
+                {blogs:blog_arr}
+            )
+            .then((result) => {
+                res.status(200).send('blog deleted');
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+};
+
 const blog_friends_page_get = function(req, res) {
     res.render('blog/friends', {title:'Friends'});
 };
@@ -151,6 +175,7 @@ module.exports = {
     blog_create_page_post,
     all_blog_list_page_get,
     single_blog_list_page_get,
+    single_blog_delete,
     blog_profile_get,
     blog_profile_post,
     blog_logout_get
