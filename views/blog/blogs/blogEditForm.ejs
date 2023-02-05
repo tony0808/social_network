@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../../partials/head.ejs') %>
+<body>
+    <header>
+        <h1>Edit blog</h1>
+    </header>
+    <%- include('../blogPartials/nav.ejs') %>
+    <main>
+        <% if (locals.blog) { %>
+            <form id="blog-update-form">
+                <label for="title">Title</label><br>
+                <input type="text" id="blog-title" name="title" value="<%= blog.title %>"><br>
+                <label for="content">Content</label><br>
+                <textarea id="blog-content" name="content"><%= blog.content %></textarea><br>
+                <span id="blog-error-msg"></span><br>
+                <button type="button" onclick="updateBlog('<%= blog._id%>')">Update</button>
+            </form>
+        <% } else { %>
+            <p> Some error occured trying to display the blog. </p>
+        <% } %>
+    </main>
+    <%- include('../../partials/footer.ejs') %>
+    <script type="text/javascript" src="/blogedit_script.js"></script>
+</body>
+</html>

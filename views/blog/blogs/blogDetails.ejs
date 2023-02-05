@@ -10,7 +10,7 @@
         <% if (locals.blog) { %>
             <h3><%= blog.title %></h3>
             <p><%= blog.content %></p>
-            <button>Update</button> <button onclick="deleteBlog('<%- blog._id  %>')">Delete</button>
+            <button onclick="location.href='http://localhost:3000/blog/edit/<%- blog._id %>'">Edit</button> <button onclick="deleteBlog('<%- blog._id  %>')">Delete</button>
         <% } else { %>
             <p> Cannot display blog </p>
         <% } %>
